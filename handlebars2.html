@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<head>
+<title></title>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<style>
+	.important-true { color: red;}
+</style>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v2.0.0.js"></script>
+<script>
+
+var data = {
+	info: [
+		{ label: { value: 'First name', className: 'first-name' }, 
+		  placeholder: 'Please enter your first name',
+          important: false
+		},
+		{ label: { value: 'Last name', className: 'last-name' },
+		  placeholder: 'Last name here',
+          important: true
+		},
+		{ label: { value: 'email', className: 'email' },
+		  placeholder: 'Your email address' ,
+          important: false
+		}
+	]
+};
+
+var defaultContext = { label: 'Question?', placeholder: 'Answer' };
+	
+	Handlebars.registerHelper("specialLength", function(helperArg) {
+		return helperArg.length - 1;
+	});
+
+	Handlebars.registerHelper("wordCount", function(a) {
+		return a.split(" ").length;
+	});
+
+$(function() {
+	var source   = $("#row-template").html();
+	var template = Handlebars.compile(source);
+
+	var refreshTable = function(){
+		var html    = template(data);
+		$(".output").html(html);
+	};
+
+	refreshTable();
+
+	$("button.add-row").on("click", function() {
+		data.info.push(
+			{ label: { value: 'Question', className: 'question' },
+		  	  placeholder: 'Answer' }		
+		);
+		refreshTable();
+	})
+
+	$("table tbody").on("click", ".remove-row", function() {
+	    // select the button
+	    var index = $(this).parents("tr").data("index");
+	    data.info.splice(index, 1);
+	    refreshTable();
+	});
+
+});
+
+</script>
+	<div class="container">
+	<div class="output"></div>
+	<script id="row-template" type="text/x-handlebars-template">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>The Header</th>
+				<th><button type="button" class="add-row btn btn-primary">+ Add Row</button></th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each info}}
+			<tr class="p1 important-{{important}}" data-index={{@index}}>
+
+				{{#with label}}
+					<td class="{{className}}">{{value}} -- {{specialLength value}} -- {{wordCount value}}</td>
+				{{/with}}
+
+				<td><input type="text" class="form-control" placeholder="{{placeholder}}"></td>
+				<td><button type="button" class="btn btn-danger remove-row">-</button>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+	</script>
+	</div>
+</body>
+</html>
