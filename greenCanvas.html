@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <title>Canvas Drawing Rectangles</title>
+    <script type="text/javascript"> <!--   
+window.addEventListener('load', function () {
+      // Step #1: Get the canvas element
+      var elem = document.getElementById('myCanvas');
+      if (!elem || !elem.getContext) {
+        return;
+      }
+      // Step #2: Get the canvas 2d context
+      var context = elem.getContext('2d');
+      if (!context) {
+        return;
+      }
+     // Step #3: INSERT YOUR CANVAS CODE HERE
+      var rectWidth=500, rectHeight=500;
+
+      //context.fillStyle = "#f00";
+      //context.fillRect(0,0, rectWidth,rectHeight);
+      //context.fillStyle = "#0f0";
+      //context.fillRect(40,40, rectWidth,rectHeight);
+      // a blue rectangle:
+      //context.fillStyle = "#00f";
+      //context.fillRect(80,80, rectWidth,rectHeight);
+      var basePointX =0 ;
+      var basePointY =0 ;
+      var color="#f00" ;
+      	var offsetX , rowCount=1 , colCount=1;
+      var colors= ["#1abc9c"];
+      
+      for(var j = 0 ; j<rowCount; j++){
+      offsetX = 0;
+	for(var i=0; i<colCount; i++) {
+	  // 1) specify the upper-left vertex
+	  offsetX=i*rectWidth;
+	  context.fillStyle= colors[(i+j)%colors.length];
+	  console.log( "  "+ offsetX );
+	  // 2) specify the width and height  
+	  context.fillRect(basePointX+offsetX,
+			   basePointY + rectHeight*j,
+			   rectWidth, rectHeight);
+	}
+      }
+      elem.addEventListener("mousedown", mouseDown, true);
+      function mouseDown(event) {
+       canvasX = event.pageX;
+       canvasY = event.pageY;
+       console.log("X: "+canvasX+" Y: "+canvasY);
+       var row= (Math.floor(((canvasY-basePointY)/rectWidth))+1) ;
+       var col= (Math.floor(((canvasX-basePointX)/rectWidth))+1);
+       console.log( " Row:" + row +" Col: " + col);
+       var color = colors[(row+col+1)%colors.length];
+       context.fillStyle = color ;
+       context.fillRect((col-1)*rectWidth+basePointY,(row-1)*rectHeight+basePointX,rectWidth, rectHeight);
+      // return ;
+      }
+           
+
+      
+      });
+ // --></script>
+    </head>
+
+ <body >
+   <script>
+   
+  </script>
+
+   <canvas id="myCanvas" width="1900" height="1600">
+   </canvas>
+   
+  </body>
+</html>
