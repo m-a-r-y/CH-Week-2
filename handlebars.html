@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v2.0.0.js"></script>
+    <script src="handlebars.js"></script>
+</head>
+<body>
+	<table border="1" class="table">
+		<thead>
+			<tr>
+				<th>Header</th>
+				<th><button id="button" type="button">Click Me!</button></th>
+			</tr>
+		</thead>
+		<tbody>		
+			<script id="row-template" type="text/x-handlebars-template">
+			{{#each info}}
+			<tr class="p1">		
+				<td class={{label.className}}>{{label.value}}</td>
+				<td><input type="text" id="label" placeholder="{{placeholder}}"></td>
+			</tr>
+			{{/each}}
+			</script>
+		</tbody>
+	</table>
+</body>
+</html>
