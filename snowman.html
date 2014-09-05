@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <title>Snowman</title>
+    <script type="text/javascript"> <!--   
+window.addEventListener('load', function () {
+      // Step #1: Get the canvas element
+      var elem = document.getElementById('myCanvas');
+      if (!elem || !elem.getContext) {
+        return;
+      }
+      // Step #2: Get the canvas 2d context
+      var context = elem.getContext('2d');
+      if (!context) {
+        return;
+      }
+     // Step #3: INSERT YOUR CANVAS CODE HERE
+      
+      //head
+      context.beginPath();
+      context.fillStyle = "#f8f8f2";
+      context.arc(255,150,50,0,2*Math.PI);
+      context.fill();
+
+      //hat
+      context.beginPath();
+      context.fillStyle = "#004737" ;
+      context.fillRect(200,90,110,20);
+
+      //eye l
+      context.beginPath();
+      context.fillStyle = "#000";
+      context.arc(235,135,2,0,2*Math.PI);
+      context.fill();
+
+      //eye r
+      context.beginPath();
+      context.fillStyle = "#000";
+      context.arc(275,135,2,0,2*Math.PI);
+      context.fill();
+
+      //nose
+      context.beginPath();
+      context.fillStyle = "#FFB370";
+      context.moveTo(255,170);
+      context.lineTo(245,140);
+      context.lineTo(265,140);
+      context.closePath();
+      context.fill();
+
+      //body
+      context.beginPath();
+      context.fillStyle = "#f8f8f2";
+      context.arc(255,265,80,0,2*Math.PI);
+      context.fill();
+
+      context.beginPath();
+      context.fillStyle = "#000";
+      context.arc(255,265,80,0,2*Math.PI);
+      context.fill();
+
+
+
+
+
+
+
+
+});
+ // --></script>
+    </head>
+
+ <body >
+   <script>
+   
+  </script>
+
+   <canvas id="myCanvas" width="800" height="500">
+   </canvas>
+   
+  </body>
+</html>
