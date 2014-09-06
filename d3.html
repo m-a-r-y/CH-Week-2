@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
+
+<circle cx="10" cy="10" r="100" fill="red" />
+
+	<script>
+	    d3.select("body")
+	         .append("p")
+	         .text("Hello D3");
+
+		var svg = d3.select("body")
+		                     .append("svg")
+		                     .attr("width", 800)
+		                     .attr("height", 500);
+
+		svg.append("circle")
+		        .attr("cx", 200)
+		        .attr("cy", 200)
+		        .attr("r",  100)
+		        .attr("fill", "red")
+	</script>
+</body>
+</html>
