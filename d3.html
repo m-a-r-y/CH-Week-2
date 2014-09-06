@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
+	<script>
+
+	var dataXValues=[];
+	var addValues = function() {
+		console.log(Math.floor(Math.random() * 75));
+		dataXValues.push(Math.floor(Math.random() * 375));
+	}
+	 for(x = 0; x < 100; x++){
+	 	addValues();
+	}
+	var radius = 10;
+	var svg = d3.select("body")
+        .append("svg")
+        .attr("width",  900)
+        .attr("height", 500);
+
+    var circles = svg.selectAll("circles")
+        .data(dataXValues)
+        .enter()
+        .append("circle")
+        .attr("cx", function(d,i) { // what is d?
+           return (3*d*Math.random());
+         })
+        .attr("cy", function(d,i) { // what is i?
+           return (3*d*Math.random());
+         })
+        .attr("r", radius)
+        .style("fill", "green");
+
+		circles.on("mouseover",function() {
+		      d3.select(this)
+		             .transition()
+		             .duration(1000)
+		             .attr("transform", function() {
+		                 var sx = 1+Math.random();
+		                 var sy = 1-Math.random();
+		                 return "scale("+sx+","+sy+")";
+		 })
+		    
+	    circles.on("click",function(){
+		    d3.select(this)
+		  		.style("fill", "red");
+		})
+	})
+	</script>
+</body>
+</html>
