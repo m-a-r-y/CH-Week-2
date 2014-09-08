@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <title>Canvas Drawing Rectangles</title>
+
+  <script> 
+      window.addEventListener('load', function () {
+      var mouseX=0, mouseY=0, mouseRow=0,mouseCol=0;
+      var context=null;
+
+      var rectWidth=50, rectHeight=50;
+      var basePointX=50, basePointY=70;
+      var offsetX=0, rowCount=8 , colCount=8;
+      var colors= ["#00f", "#95a5a6","#ff0", 
+                   "#e74c3c", "#16a085", "#9b59b6"];
+      var black = "#000";
+
+/* 
+OLD CODE: 
+      // Step #1: Get the canvas element
+      var elem = document.getElementById('canvas');
+
+      if (!elem || !elem.getContext) {
+        return;
+      }
+
+      // Step #2: Get the canvas 2d context
+      var context = elem.getContext('2d');
+      if (!context) {
+          return;
+      }
+*/
+
+      function init() {
+        var canvas = document.getElementById("canvas");
+        canvas.addEventListener("mousedown", mouseDown, false);
+        context = canvas.getContext('2d');
+      }
+
+      // define the event listener 
+      init();
+
+      // render the checkboard
+      drawBoard();
+
+      function mouseDown(event) {
+         mouseX = event.pageX;
+         mouseY = event.pageY;
+  
+         mouseRow = Math.floor((mouseX - basePointY)/ rectWidth +1);
+         mouseCol = Math.floor((mouseY - basePointX)/ rectHeight +1);
+
+         function colorChange(){
+            context.fillStyle = black;
+
+         }
+  
+         // console.log("X: "+mouseX+" Y: "+mouseY);
+         // console.log("row: "+mouseRow+" col: "+mouseCol);
+      }
+
+      function drawBoard() {
+        // Step #3: INSERT YOUR CANVAS CODE HERE
+//console.log("rendering board");
+          
+        for(var j = 0 ; j<rowCount; j++){
+           offsetX = 0;
+           for(var i=0; i<colCount; i++) {
+             // 1) specify the upper-left vertex
+             offsetX=i*rectWidth;
+             context.fillStyle = colors[(i+j)%colors.length];
+  
+//console.log("fill: "+context.fillStyle);
+//console.log("x: "+(basePointX+offsetX));
+//console.log("y: "+(basePointY+rectHeight*j));
+//console.log("w: "+rectWidth+" h: "+rectHeight);
+
+             // 2) specify the width and height  
+             context.fillRect(basePointX+offsetX,
+                              basePointY+rectHeight*j,
+                              rectWidth, rectHeight);
+           }
+        }
+      }
+    });
+  </script>
+ </head>
+
+ <body>
+   <canvas id="canvas" width="800" height="600"> </canvas>
+ </body>
+</html>
