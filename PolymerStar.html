@@ -1,0 +1,35 @@
+<link rel="import" href="../components/polymer/polymer.html">
+<polymer-element name="star-button">
+  <template>
+    <style>
+      img:hover {
+        -webkit-animation: spin linear .75s infinite;;
+        /*-webkit-transform: scale(1.2);*/
+      }
+      @-webkit-keyframes spin {
+        0%   { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+
+    <div>
+      <img height="65px" width="65px" src="smiling-gold-star.png">
+    </div>
+
+  <content></content>
+  </template>
+  <script>
+  Polymer({
+    publish: {
+      favorite: {
+        value: false,
+        reflect: true
+      }
+    },
+    favoriteTapped: function(event, detail, sender) {
+      this.favorite = !this.favorite;
+      this.fire('favorite-tap');
+    }
+  });
+  </script>
+</polymer-element>
